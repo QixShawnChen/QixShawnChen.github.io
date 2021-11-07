@@ -1,0 +1,17 @@
+---
+title: "p8105_hw4_qc2307"
+author: "Qixiang Chen"
+date: "11/06"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+# This is Qixiang's personal webpage. Welcome!
+Welcome to this page. There are some basic information about my academic and professional experience. I am currently seeking
+an intern position in biostatistics-related field. Hope you could give a chance after seeing the following cute picture.
+
+![](https://media3.giphy.com/media/U2nN0ridM4lXy/giphy.gif?cid=ecf05e4761oy9q6af8h8qjlhym0xz6cwkky8tpqdfjnovvu8&rid=giphy.gif&ct=g)
+

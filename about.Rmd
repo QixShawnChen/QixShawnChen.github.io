@@ -1,0 +1,52 @@
+---
+title: "About me"
+author: "Qixiang Chen"
+date: "11/06"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+## Academic Background:
+#### Education: 
+##### [Columbia University](https://www.columbia.edu/),       New York City, NY
+MS in Biostatistics-Public Health Data Science Track   (Sept 2021--- May 2023)
+
+##### [Ohio State Univeristy](https://www.osu.edu/),               Columbus, OH
+BS in Mathematics-Theoretical Track                      (Jan 2017--- May 2021)
+<br /> BS in Actuarial Science                           (Jan 2017--- May 2021)
+<br /> BS in Economics                                   (Jan 2017--- May 2021)
+<br /> Honor: Cum Laude, Dean's Lists
+
+#### Coursera
+Programming Foundations with JavaScript, HTML and CSS    (issued in Aug 2021)
+
+## Professional Experiences:
+
+##### Forkaia Corporation                                
+Student Intern                                       (Dec 2020--- Mar 2021)
+<br /> Participated in making accelerated solutions of business for startups based 
+on business data
+<br /> Involved in formalizing databases and helps define new data collections and
+analysis processes for startups
+
+##### Guangdong Medical University
+Research Assistant                                   (July 2019--- Sept 2019)
+<br /> Participated in data collection process for the research "Alzheimer's Disease 
+Screening in Western Guangdong province of China"
+<br /> Involved in data formatting, analyzed the data collection, and estimated the 
+risk factors of Alzheimer's disease
+
+##### China Construction Bank
+Summer Intern                                            (June 2016-- Aug 2016)
+<br /> Introduced financial services of the bank to prospective clients
+<br /> Demonstrated the elder how the financial services of the bank could control 
+the risk
+
+
+## Skills & Language
+Computer Skills: C++, STATA, Java, MATLAB, R-Studio, Final Cut Pro, 
+Photoshop, Microsoft Office (Word, Excel, Powerpoint, Access)
+<br /> Language: English, Chinese Mandarin, Cantonese

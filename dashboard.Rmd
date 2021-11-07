@@ -1,0 +1,124 @@
+---
+title: "dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(dplyr)
+library(rnoaa)
+```
+
+Step1: data cleaning
+```{r}
+weather_df =
+rnoaa::meteo_pull_monitors(
+ c("USW00094728", "USC00519397", "USS0023B17S"),
+ var = c("PRCP", "SNOW", "SNWD", "TMAX", "TMIN"),
+ date_min = "2020-01-01",
+date_max = "2020-12-31") %>%
+ mutate(
+name = recode(
+ id,USW00094728 = "CentralPark_NY", USC00519397 = "Waikiki_HA", USS0023B17S = "Waterhole_WA"),tmin = tmin / 10,tmax = tmax / 10) %>%
+  distinct() %>%
+  replace_na(list(prcp = 0, snow = 0, snwd = 0)) %>%
+  drop_na(tmax, tmin) %>%
+  select(name, id, everything())
+weather_month = 
+  weather_df %>%
+  mutate(date2 = date) %>%
+  separate(date2, into = c("year", "month", "day"), sep = "-") %>%
+  mutate(year = as.numeric(year),
+         month = as.numeric(month),
+         day = as.numeric(day)) %>%
+  mutate(month = case_when(month == 1 ~ "Jan",
+                           month == 2 ~ "Feb",
+                           month == 3 ~ "Mar",
+                           month == 4 ~ "Apr",
+                           month == 5 ~ "May",
+                           month == 6 ~ "June",
+                           month == 7 ~ "July",
+                           month == 8 ~ "Aug",
+                           month == 9 ~ "Sept",
+                           month == 10 ~ "Oct",
+                           month == 11 ~ "Nov",
+                           month == 12 ~ "Dec",
+                           )) %>%
+  mutate(month= forcats::fct_relevel(month, "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct",
+                                          "Nov", "Dec"))
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+weather_month %>%
+  filter(id == "USW00094728") %>%
+  mutate(text_label = str_c("precipitation: ", prcp, "\ndate: ", date, "\nsnow: ", snow)) %>%
+  plot_ly(x = ~tmin, y = ~tmax, color = ~month, text = ~text_label, alpha = 0.3, type = "scatter", mode = "markers", 
+          colors = "viridis")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+weather_month %>%
+  filter(id == "USW00094728") %>%
+  mutate(text_label2 = str_c("date: ", date, "\nlocation: ", name)) %>%
+  plot_ly(y = ~prcp, x = ~month, text = ~text_label2, color = ~month, type = "box")
+```
+
+### Chart C
+
+```{r}
+wider_prcp_df = 
+  weather_month %>%
+  select(name, id, date, prcp, month) %>%
+  pivot_wider(
+    names_from = month,
+    values_from =prcp
+  ) %>%
+  select(-date)
+prcp_sum_df = 
+  wider_prcp_df %>%
+  mutate(
+    Jan = sum(wider_prcp_df$Jan, na.rm = TRUE),
+    Feb = sum(wider_prcp_df$Feb, na.rm = TRUE),
+    Mar = sum(wider_prcp_df$Mar, na.rm = TRUE),
+    Apr = sum(wider_prcp_df$Apr, na.rm = TRUE),
+    May = sum(wider_prcp_df$May, na.rm = TRUE),
+    June = sum(wider_prcp_df$June, na.rm = TRUE),
+    July = sum(wider_prcp_df$July, na.rm = TRUE),
+    Aug = sum(wider_prcp_df$Aug, na.rm = TRUE),
+    Sept = sum(wider_prcp_df$Sept, na.rm = TRUE),
+    Oct = sum(wider_prcp_df$Oct, na.rm = TRUE),
+    Nov = sum(wider_prcp_df$Nov, na.rm = TRUE),
+    Dec = sum(wider_prcp_df$Dec, na.rm = TRUE),
+  )
+prcp_sum_df = prcp_sum_df[1,]
+prcp_sum_df = 
+  prcp_sum_df %>%
+  pivot_longer(
+    Jan:Dec,
+    names_to = "month",
+    values_to = "prcp"
+  )
+prcp_sum_df %>%
+  mutate(month= forcats::fct_relevel(month, "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct",
+                                          "Nov", "Dec")) %>%
+  plot_ly(x = ~month, y = ~prcp, color = ~month)
+```
+
