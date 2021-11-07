@@ -1,7 +1,7 @@
 ---
 title: "About me"
 author: "Qixiang Chen"
-date: "11/06"
+date: "11/06/2021"
 output: 
   html_document:
     toc: true
@@ -14,7 +14,7 @@ output:
 ##### [Columbia University](https://www.columbia.edu/),       New York City, NY
 MS in Biostatistics-Public Health Data Science Track   (Sept 2021--- May 2023)
 
-##### [Ohio State Univeristy](https://www.osu.edu/),               Columbus, OH
+##### [Ohio State University](https://www.osu.edu/),               Columbus, OH
 BS in Mathematics-Theoretical Track                      (Jan 2017--- May 2021)
 <br /> BS in Actuarial Science                           (Jan 2017--- May 2021)
 <br /> BS in Economics                                   (Jan 2017--- May 2021)
